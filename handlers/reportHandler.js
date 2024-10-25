@@ -3,6 +3,11 @@
 const { ChannelType, EmbedBuilder, ActionRowBuilder, ButtonBuilder, ButtonStyle, PermissionsBitField } = require('discord.js')
 const modChannelId = process.env.MODERATORCHANNELID
 const supportCategoryId = process.env.SUPPORTCATID
+const adminRoleIds = [
+  process.env.ADMINROLEID,
+  process.env.SMASTERROLEID,
+  process.env.MODERATORROLEID,
+]
 
 module.exports = (client) => {
   client.on('interactionCreate', async (interaction) => {
@@ -38,8 +43,12 @@ module.exports = (client) => {
           permissionOverwrites: [
             {
               id: interaction.user.id,
-              allow: [PermissionsBitField.Flags.ViewChannel, PermissionsBitField.Flags.SendMessages],
+              allow: [PermissionsBitField.Flags.ViewChannel, PermissionsBitField.Flags.SendMessages, PermissionsBitField.Flags.ReadMessageHistory],
             },
+            ...adminRoleIds.map(roleId => ({
+              id: roleId,
+              allow: [PermissionsBitField.Flags.ViewChannel, PermissionsBitField.Flags.SendMessages, PermissionsBitField.Flags.ReadMessageHistory],
+            })),
             {
               id: guild.roles.everyone.id,
               deny: [PermissionsBitField.Flags.ViewChannel],
@@ -55,7 +64,7 @@ module.exports = (client) => {
         )
 
         await reportChannel.send({
-          content: `Thank you for taking the time to file this report. A moderator will join you shortly to address the matter.`,
+          content: `Thank you for taking the time to file this report. A moderator @here will join you shortly to address the matter.`,
           components: [actionRow],
         })
 
@@ -78,12 +87,9 @@ module.exports = (client) => {
     if (!buttonInteraction.isButton()) return
     const channel = buttonInteraction.channel
     const adminChannel = client.channels.cache.get(modChannelId)
-    const isAdmin = [
-      process.env.ADMINROLEID,
-      process.env.SMASTERROLEID,
-      process.env.MODERATORROLEID
-    ].some(roleId => buttonInteraction.member.roles.cache.has(roleId))
 
+    // Check if the user has any of the admin roles
+    const isAdmin = adminRoleIds.some(roleId => buttonInteraction.member.roles.cache.has(roleId))
     if (!isAdmin) {
       await buttonInteraction.reply({ content: 'Only admins can interact with this button.', ephemeral: true })
       return

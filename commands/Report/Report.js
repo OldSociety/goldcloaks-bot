@@ -4,7 +4,7 @@ const { SlashCommandBuilder, ModalBuilder, TextInputBuilder, TextInputStyle, Act
 
 module.exports = {
   data: new SlashCommandBuilder()
-    .setName('anonreport')
+    .setName('report')
     .setDescription('Report activity to the staff anonymously or publicly'),
 
   async execute(interaction) {
