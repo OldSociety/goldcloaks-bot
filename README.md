@@ -1,6 +1,6 @@
-# Eldritch Road Bot
+# Goldcloaks Bot
 
-**Eldritch Road** is an idle game designed for discord servers. Players take on the role of head of a paranormal investigation organization that recruits, trains a team to take down various threats to the world. 
+**Eldritch Road** is a moderation bot for dnd5e. 
 
 ## Installation
 
@@ -23,12 +23,15 @@ In the root of your project, create a `.env` file and add the following variable
 
 ```env
 TOKEN=your-discord-bot-token
-HELLBOUNDCHANNELID=channel-id-for-commands
-BOTTESTCHANNELID=channel-id-for-testing
-ADMINROLEID=your-admin-role-id
-BOOSTERROLEID=your-booster-role-id
-UNWANTEDROLEID=role-id-for-banned-users
 GUILDID=your-discord-guild-id
+CLIENTID=your-bot-id
+ADMINROLEID=your-admin-role-id
+SMASTERROLEID=your-server-master-role-id
+MODERATORROLEID=your-moderator-role-users
+SUPPORTCATID=support-category-role
+BOTTESTCHANNELID=channel-id-for-testing
+MODERATORCHANNELID=moderator-channel-id
+
 DATABASE_URL=sqlite://dev.sqlite # SQLite file for development
 ```
 

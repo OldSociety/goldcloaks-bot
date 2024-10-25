@@ -112,13 +112,12 @@ module.exports = (client) => {
         .setColor(0xff0000)
         .setTitle('🔒 Ticket Closed')
         .addFields(
-          { name: 'ID', value: channel.name, inline: true },
-          { name: 'Opened By', value: `<@${buttonInteraction.user.id}>`, inline: true },
-          { name: 'Closed By', value: `<@${buttonInteraction.user.id}>`, inline: true },
-          { name: 'Open Time', value: `<t:${Math.floor(channel.createdTimestamp / 1000)}:F>`, inline: true },
-          { name: 'Ticket Name', value: channel.name, inline: true },
-          { name: 'Claimed By', value: buttonInteraction.user.tag, inline: true },
-          { name: 'Users', value: `<@${buttonInteraction.user.id}>` }
+          { name: '🆔', value: channel.name, inline: true },
+          { name: '✅Opened By', value: `<@${buttonInteraction.user.id}>`, inline: true },
+          { name: '❌Closed By', value: `<@${buttonInteraction.user.id}>`, inline: true },
+          { name: '⏱️Open Time', value: `<t:${Math.floor(channel.createdTimestamp / 1000)}:F>`, inline: true },
+          { name: '#️⃣ Ticket Name', value: channel.name, inline: true },
+          { name: '🙋‍♂️ Claimed By', value: buttonInteraction.user.tag, inline: true },
         )
         .setTimestamp()
 
