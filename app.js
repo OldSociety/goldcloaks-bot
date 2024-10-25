@@ -15,6 +15,8 @@ const sequelize = require('./config/sequelize.js')
 
 const { Client, Collection, GatewayIntentBits } = require('discord.js')
 const { User } = require('./Models/model')
+const reportHandler = require('./handlers/reportHandler')
+
 
 // Create a new client instance
 const client = new Client({
@@ -88,5 +90,8 @@ for (const file of eventFiles) {
 
 // Log in to Discord with your client's token
 client.login(process.env.TOKEN)
+
+// Manage Reports
+reportHandler(client)
 
 module.exports = { sequelize }
